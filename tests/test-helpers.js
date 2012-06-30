@@ -21,6 +21,10 @@ var createTestFiles = function(path, count){
 	}
 };
 
+exports.createHiddenTestFiles = function(path){
+	_fs.writeFileSync(path + '/.hiddenFile.js', index);
+};
+
 exports.setup = function(path, count){
 	_fs.mkdirSync(path);
 	createTestFiles(path, count);

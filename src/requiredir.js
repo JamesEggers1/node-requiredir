@@ -41,7 +41,7 @@ var _importFiles = function(path, files){
 		, obj = {};
 	
 	files.forEach(function (element, index, array){
-		if (_fs.lstatSync(path + "/" + element).isFile()){
+		if (_fs.lstatSync(path + "/" + element).isFile() && element.substring(0,1) !== "."){
 			trimmedName =  element.substring(0, (element.length - 3));
 			module = require(relativePath + "/" + trimmedName);			
 			moduleList.push(module);

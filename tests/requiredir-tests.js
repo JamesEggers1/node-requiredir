@@ -59,5 +59,14 @@ describe("requiredir.js", function(){
 			(typeof modArray[1] === "object").should.be.true;
 			(typeof modArray[2] === "object").should.be.true;
 		});
+		
+		it("should not import hidden files - file names starting with a '.'.", function(){
+			_helpers.createHiddenTestFiles(path);
+			var modules = requiredir(path);
+			modules.length.should.equal(count);
+			(typeof modules.mod0 === "object").should.be.true;
+			(typeof modules.mod1 === "object").should.be.true;
+			(typeof modules.mod2 === "object").should.be.true;
+		});
 	});
 });
