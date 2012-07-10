@@ -1,5 +1,6 @@
 "use strict";
-var _fs = require("fs")
+var _compat = require("./node06compat")
+	, _fs = require("fs")
 	, _path = require("path");
 	
 module.exports = (function(){
