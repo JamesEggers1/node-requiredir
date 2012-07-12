@@ -22,12 +22,12 @@ describe("requiredir.js", function(){
 		
 		it("should throw an exception if the path does not exist.", function(){
 			var pathToTest = "./doesnotexist";
-			(function(){requiredir(pathToTest);}).should.throw("The directory path does not exist. [" + _path.resolve(pathToTest) + "]");
+			(function(){requiredir(pathToTest);}).should.throw("The directory path does not exist. [" + _path.resolve(__dirname, pathToTest) + "]");
 		});
 		
 		it("should throw an exception if the path is not a directory.", function(){
-			var pathToTest = "./LICENSE";
-			(function(){requiredir(pathToTest);}).should.throw("The path provided is not a directory. [" + _path.resolve(pathToTest) + "]");
+			var pathToTest = "../LICENSE";
+			(function(){requiredir(pathToTest);}).should.throw("The path provided is not a directory. [" + _path.resolve(__dirname, pathToTest) + "]");
 		});
 	});
 	

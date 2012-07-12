@@ -5,7 +5,7 @@ var _compat = require("./node06compat")
 	
 module.exports = (function(){
 
-	var _verifyDirectory = function(path) {
+	var _verifyAndResolveDirectory = function(path) {
 		var stats; 
 
 		if (typeof path === "undefined"
@@ -13,9 +13,9 @@ module.exports = (function(){
 			throw new Error("The path must be provided when instantiating the object.");
 		}
 
-		// Resolve the full path so that if an error occurs
-		// we can show the user the absolute path, for clarity.
-		path = _path.resolve(path);
+		// Resolve the given require path relative to the parent module's directory.
+		// This way the user can provide paths that are relative to themselves.
+		path = _path.resolve(_path.dirname(module.parent.filename), path);
 
 		try {
 			stats = _fs.statSync(path);
@@ -26,11 +26,13 @@ module.exports = (function(){
 		if (!stats.isDirectory()){
 			throw new Error("The path provided is not a directory. [" + path + "]");
 		}
+
+		return path;
 	};
 
 	var _importFiles = function(path, files){
+
 		var moduleList = []
-			, relativePath = _path.resolve(_path.join(process.cwd(), path))
 			, trimmedName
 			, module
 			, obj = {};
@@ -39,7 +41,7 @@ module.exports = (function(){
 			// Require each file, skipping dotfiles.
 			if (_fs.lstatSync(_path.join(path, element)).isFile() && element.substring(0,1) !== "."){
 				trimmedName = _path.basename(element, _path.extname(element));
-				module = require(_path.join(relativePath, trimmedName));			
+				module = require(_path.join(path, trimmedName));			
 				moduleList.push(module);
 				obj[trimmedName] = module;
 			}
@@ -52,7 +54,8 @@ module.exports = (function(){
 	};
 	
 	return function(path){
-		_verifyDirectory(path);
+
+		path = _verifyAndResolveDirectory(path);
 
 		var fileList = []
 			, modules = [];
