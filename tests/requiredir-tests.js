@@ -2,7 +2,8 @@
 var _mocha = require("mocha")
 	, _should = require("should")
 	, _helpers = require("./test-helpers")
-	, requiredir = require("../src/requiredir");
+	, requiredir = require("../src/requiredir")
+	, _path = require("path");
 	
 describe("requiredir.js", function(){
 	describe("Instantiation", function(){
@@ -20,11 +21,13 @@ describe("requiredir.js", function(){
 		});
 		
 		it("should throw an exception if the path does not exist.", function(){
-			(function(){requiredir("./doesnotexist");}).should.throw("The directory path does not exist.");
+			var pathToTest = "./doesnotexist";
+			(function(){requiredir(pathToTest);}).should.throw("The directory path does not exist. [" + _path.resolve(pathToTest) + "]");
 		});
 		
 		it("should throw an exception if the path is not a directory.", function(){
-			(function(){requiredir("./LICENSE");}).should.throw("The path provided is not a directory.");
+			var pathToTest = "./LICENSE";
+			(function(){requiredir(pathToTest);}).should.throw("The path provided is not a directory. [" + _path.resolve(pathToTest) + "]");
 		});
 	});
 	

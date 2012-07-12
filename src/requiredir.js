@@ -10,32 +10,36 @@ module.exports = (function(){
 
 		if (typeof path === "undefined"
 			|| (typeof path === "string" && path.trim().length === 0)) {
-			throw new TypeError("The path must be provided when instantiating the object.");
+			throw new Error("The path must be provided when instantiating the object.");
 		}
+
+		// Resolve the full path so that if an error occurs
+		// we can show the user the absolute path, for clarity.
+		path = _path.resolve(path);
 
 		try {
 			stats = _fs.statSync(path);
-
 		} catch (e) {
-			throw new TypeError("The directory path does not exist.");
+			throw new Error("The directory path does not exist. [" + path + "]");
 		}
 
 		if (!stats.isDirectory()){
-			throw new TypeError("The path provided is not a directory.");
+			throw new Error("The path provided is not a directory. [" + path + "]");
 		}
 	};
 
 	var _importFiles = function(path, files){
 		var moduleList = []
-			, relativePath = _path.resolve(process.cwd() + "/" + path)
+			, relativePath = _path.resolve(_path.join(process.cwd(), path))
 			, trimmedName
 			, module
 			, obj = {};
 
 		files.forEach(function (element, index, array){
-			if (_fs.lstatSync(path + "/" + element).isFile() && element.substring(0,1) !== "."){
-				trimmedName =  element.substring(0, (element.length - 3));
-				module = require(relativePath + "/" + trimmedName);			
+			// Require each file, skipping dotfiles.
+			if (_fs.lstatSync(_path.join(path, element)).isFile() && element.substring(0,1) !== "."){
+				trimmedName = _path.basename(element, _path.extname(element));
+				module = require(_path.join(relativePath, trimmedName));			
 				moduleList.push(module);
 				obj[trimmedName] = module;
 			}
