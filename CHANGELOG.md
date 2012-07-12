@@ -1,6 +1,11 @@
 Change Log
 ==============
 
+## 2012-07-12 ##
+* npm package version updated to 1.0.6
+* Merged in changes from Joshua Poehls [jpoehls] concerning pathing issues.
+* Added contributors section to README.
+
 ## 2012-07-10 ##
 * npm package version updated to 1.0.5
 * Added compatibility code to address path.exists -> fs.exists updates for Node 0.8.

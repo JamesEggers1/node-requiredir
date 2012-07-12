@@ -28,8 +28,14 @@ console.log("Modules can be accessed as properties to the imports variable: " + 
 console.log("Modules can also be accessed by Array to access them in order of importing: " + imports.toArray().length);
 ```
 
+## Contributors ##
+* James Eggers
+* [Joshua Poehls](https://github.com/jpoehls)
+
 
 ## License ##
+
+(MIT) 
 
 Copyright (c) 2012 James Eggers
 
