@@ -30,15 +30,15 @@ module.exports = (function(){
 
 	var _importFiles = function(path, files){
 		var moduleList = []
-			, relativePath = _path.resolve(process.cwd() + "/" + path)
+			, relativePath = _path.resolve(_path.join(process.cwd(), path))
 			, trimmedName
 			, module
 			, obj = {};
 
 		files.forEach(function (element, index, array){
-			if (_fs.lstatSync(path + "/" + element).isFile() && element.substring(0,1) !== "."){
+			if (_fs.lstatSync(_path.join(path, element)).isFile() && element.substring(0,1) !== "."){
 				trimmedName =  element.substring(0, (element.length - 3));
-				module = require(relativePath + "/" + trimmedName);			
+				module = require(_path.join(relativePath, trimmedName));			
 				moduleList.push(module);
 				obj[trimmedName] = module;
 			}
