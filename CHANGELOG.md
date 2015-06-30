@@ -1,5 +1,11 @@
 Change Log
 ==============
+## 2015-06-30 ##
+* npm package version updated to 1.0.7
+* Updated package devDependencies
+* Added License to package.json.
+* Updated Travis-ci to test v0.6-v0.12
+* Updated copyright date in README.
 
 ## 2012-07-12 ##
 * npm package version updated to 1.0.6

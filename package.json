@@ -1,27 +1,31 @@
 {
   "name": "requiredir",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "James Eggers <james.r.eggers@gmail.com> (http://www.jamesreggers.com/)",
   "description": "A module for importing a directory of Node.js modules and adding them into an array or as properties of the module variable.",
   "homepage": "https://github.com/JamesEggers1/node-requiredir",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/JamesEggers1/node-requiredir"
   },
   "main": "./src/requiredir",
   "engines": {
-    "node": ">= 0.6.x"
+    "node": ">= 0.6"
   },
   "scripts": {
-	"test": "mocha ./tests/requiredir-tests.js -R spec"
+    "test": "mocha ./tests/requiredir-tests.js -R spec"
   },
-  "keywords": [ "require", "require directory"],
+  "keywords": [
+    "require",
+    "require directory"
+  ],
   "bugs": {
     "url": "https://github.com/JamesEggers1/node-requiredir/issues"
   },
   "devDependencies": {
-	"mocha": "1.2.1",
-	"should": "0.6.3",
-	"rimraf": "2.0.2"
+    "mocha": "^2.2.5",
+    "rimraf": "2.0.2",
+    "should": "^7.0.1"
   }
 }
