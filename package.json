@@ -24,8 +24,8 @@
     "url": "https://github.com/JamesEggers1/node-requiredir/issues"
   },
   "devDependencies": {
-    "mocha": "^2.2.5",
+    "mocha": "1.21.5",
     "rimraf": "2.0.2",
-    "should": "^7.0.1"
+    "should": "5.0.1"
   }
 }
